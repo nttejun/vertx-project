@@ -10,9 +10,12 @@
 apply plugin: 'java-library'
 apply plugin: 'eclipse'
 apply plugin: 'java'
+apply plugin: 'application'
 
+mainClassName = "training.StarterMain"
 sourceCompatibility = '1.8'
 version = '1.0-SNAPSHOT'
+
 
 // In this section you declare where to find the dependencies of your project
 repositories {
@@ -32,6 +35,8 @@ dependencies {
 	compile "io.vertx:vertx-core:3.4.1"
  	compile 'io.vertx:vertx-web:3.4.1'
 	compile 'junit:junit:4.12'
+    compile 'ch.qos.logback:logback-classic:1.2.3'
+    compile 'ch.qos.logback:logback-core:1.2.3'
 }
 
 task wrapper(type:Wrapper){
