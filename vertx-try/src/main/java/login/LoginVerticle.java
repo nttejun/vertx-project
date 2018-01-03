@@ -20,6 +20,7 @@ import io.vertx.ext.web.Router;
 
 public class LoginVerticle extends AbstractVerticle {
 	private static final Logger logger = LoggerFactory.getLogger(LoginVerticle.class);
+	public String id = null;
 
 	public static void main(String[] args) {
 		Vertx vertx = Vertx.vertx();
@@ -74,10 +75,13 @@ public class LoginVerticle extends AbstractVerticle {
 								ResultSet rsSet = res.result();
 								List<JsonArray> jsonArray = rsSet.getResults();
 
-								String id = null;
 								for (JsonArray ja : jsonArray) {
-									id = ja.getString(0);
 									logger.info("id " + ja.getString(0));
+									id = ja.getString(0);
+									// result print web
+									HttpServerResponse response = routingContext.response();
+									response.putHeader("content-type", "text/plain");
+									response.end(id);
 								}
 							}
 						});
@@ -88,8 +92,7 @@ public class LoginVerticle extends AbstractVerticle {
 				logger.info("Invalid input id value");
 				logger.info(request.getParam("id"));
 			}
-			request.response().end();
-			logger.info("login end...");
+				logger.info("login end...");
 		});
 
 		// Create the HTTP server and pass the "accept" method to the request handler.
